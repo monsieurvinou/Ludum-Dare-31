@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:a2655bb846d95c74eab2d855d8c52a0c:44c8b579dfb8029ea5314ee6eefd080b:5f7a6e04e05c6a4e4aed0ee96b7dec4f$ -->
+<TextureAtlas imagePath="hero.png">
+    <SubTexture name="jump_1" x="2" y="2" width="17" height="29" frameX="-7" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="walk_1" x="2" y="33" width="14" height="30" frameX="-8" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="walk_2" x="2" y="193" width="10" height="29" frameX="-10" frameY="-1" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="walk_3" x="14" y="224" width="9" height="28" frameX="-11" frameY="-2" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="walk_4" x="2" y="224" width="10" height="29" frameX="-11" frameY="-1" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="walk_5" x="2" y="161" width="10" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wallslide_1" x="14" y="193" width="10" height="29" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="idle_1" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_1" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_10" x="14" y="161" width="10" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_11" x="15" y="97" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_12" x="14" y="161" width="10" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_13" x="2" y="65" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_14" x="14" y="161" width="10" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_15" x="15" y="97" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_16" x="14" y="161" width="10" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_17" x="2" y="65" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_18" x="2" y="97" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_19" x="2" y="129" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_2" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_20" x="15" y="129" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_3" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_4" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_5" x="15" y="65" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_6" x="15" y="129" width="9" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_7" x="2" y="129" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_8" x="2" y="97" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+    <SubTexture name="wave_9" x="2" y="65" width="11" height="30" frameX="-11" frameY="0" frameWidth="30" frameHeight="30"/>
+</TextureAtlas>

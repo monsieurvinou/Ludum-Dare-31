@@ -6,6 +6,7 @@ package core.states
 	import citrus.input.controllers.gamepad.maps.GamePadMap;
 	import citrus.input.controllers.gamepad.maps.Xbox360GamepadMap;
 	import citrus.input.controllers.Keyboard;
+	import citrus.objects.CitrusSprite;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.physics.nape.Nape;
 	import com.greensock.plugins.HexColorsPlugin;
@@ -25,6 +26,8 @@ package core.states
 		public var isUsingGamepad:Boolean = false;
 		public var transitionScreen:Quad;
 		public var controlsAdded:Boolean = false;
+		protected var _background:CitrusSprite;
+		public var hero:Hero;
 		
 		public function MainState()
 		{
@@ -36,6 +39,8 @@ package core.states
 			transitionScreen = new Quad(800, 640, 0x000000);
 			transitionScreen.alpha = 1;
 			
+			_background = new CitrusSprite("", { width: 800, height: 640, view: new Quad(800,640,0xCCCCCC) } );
+			
 			Starling.current.stage.addChild(transitionScreen);
 			TweenPlugin.activate([HexColorsPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
 		}
@@ -46,23 +51,22 @@ package core.states
 			// We add the different element for the game to work
 			add(nape);
 			
-			// Define controls
-			// var keyboard:Keyboard = _ce.input.keyboard as Keyboard;
-			
-			var padManager:GamePadManager = new GamePadManager(1,Xbox360GamepadMap);
-			padManager.onControllerAdded.add(addGamePad);
-
-			function addGamePad(pad:Gamepad):void {
-				pad.setStickActions(GamePadMap.STICK_LEFT,"up","right","down","left");
-				pad.setButtonAction(GamePadMap.BUTTON_LEFT, "fire");
-				pad.setButtonAction(GamePadMap.BUTTON_BOTTOM, "jump");
-				pad.setButtonAction(GamePadMap.BUTTON_TOP, "retrieve");
-				pad.setButtonAction(GamePadMap.BUTTON_RIGHT, "use");
-			}
-			
+			// CONTROLS
 			if ( !controlsAdded ) {
-				var keyboard:Keyboard = _ce.input.keyboard;
+				// Gamepad
+				var padManager:GamePadManager = new GamePadManager(1,Xbox360GamepadMap);
+				padManager.onControllerAdded.add(addGamePad);
+
+				function addGamePad(pad:Gamepad):void {
+					pad.setStickActions(GamePadMap.STICK_LEFT,"up","right","down","left");
+					pad.setButtonAction(GamePadMap.BUTTON_LEFT, "switch");
+					pad.setButtonAction(GamePadMap.BUTTON_BOTTOM, "jump");
+					pad.setButtonAction(GamePadMap.BUTTON_TOP, "taunt");
+					//pad.setButtonAction(GamePadMap.BUTTON_RIGHT, "use");
+				}
 				
+				// Keyboard
+				var keyboard:Keyboard = _ce.input.keyboard;
 				// We remove the default controls
 				keyboard.removeKeyActions(Keyboard.SPACE);
 				keyboard.removeKeyActions(Keyboard.LEFT);
@@ -75,24 +79,33 @@ package core.states
 				keyboard.addKeyAction("up", Keyboard.UP);
 				keyboard.addKeyAction("down", Keyboard.DOWN);
 				
-				keyboard.addKeyAction("jump", Keyboard.W);
-				keyboard.addKeyAction("fire", Keyboard.C);	
+				keyboard.addKeyAction("jump", Keyboard.SPACE);
+				keyboard.addKeyAction("taunt", Keyboard.TAB);
+				keyboard.addKeyAction("switch", Keyboard.SHIFT);
+				keyboard.addKeyAction("switch", Keyboard.CTRL);
+				keyboard.addKeyAction("switch", Keyboard.A);
+				keyboard.addKeyAction("switch", Keyboard.Z);
+				keyboard.addKeyAction("switch", Keyboard.E);
 				
 				controlsAdded = true;
 			}
 			
-			view.camera.setUp(null, new Rectangle(0,0, 2048, 2048), null, new Point(0.5, 0.5));
+			add(_background);
 			
-			TweenLite.to(transitionScreen, 0.3, { alpha : 0 } );
-			
-			
-			add(new Platform("sol", { width: 800, height: 10, x: 400, y: 630 } ));
+			/* TEST PURPOSE */
 			var hero:Hero = new Hero();
 			hero.x = 400; hero.y = 600;
 			add(hero);
 			
-			var te:TextField = new TextField(400, 30, "COUCOUCOUCOU", "Verdana", 24, 0xFFFFFF);
-			Starling.current.stage.addChild(te);
+			view.camera.setUp(hero, new Rectangle(0,0, 800, 640), null, new Point(0.5, 0.5));
+			
+			TweenLite.to(transitionScreen, 0.3, { alpha : 0 } );
+		}
+		
+		override public function destroy():void
+		{
+			transitionScreen.dispose();
+			super.destroy();
 		}
 	}
 
