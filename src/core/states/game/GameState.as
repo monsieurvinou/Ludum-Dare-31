@@ -116,7 +116,7 @@ package core.states.game
 		protected function updateTimer(e:TimerEvent):void
 		{
 			
-			if ( nbSeconds - 1 == 0 ) {
+			if ( nbSeconds == 0 ) {
 				// END GAME
 				if ( !_isScoreScreen ) isScoreScreen = true;
 			} else {
