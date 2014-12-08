@@ -16,6 +16,7 @@ package core.states
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import nape.geom.Vec2;
+	import org.osflash.signals.Signal;
 	import starling.core.Starling;
 	import starling.display.Quad;
 	import starling.text.TextField;
@@ -28,26 +29,24 @@ package core.states
 		public var controlsAdded:Boolean = false;
 		protected var _background:CitrusSprite;
 		public var hero:Hero;
+		public var restartLevel:Signal;
 		
 		public function MainState()
 		{
 			super();
 			// On crée l'espace physique
 			nape = new Nape("nape");
-			nape.gravity = new Vec2(0,100);
-			nape.visible = true;
-			transitionScreen = new Quad(800, 640, 0x000000);
-			transitionScreen.alpha = 1;
+			nape.gravity = new Vec2(0,80);
+			nape.visible = false;
 			
 			_background = new CitrusSprite("", { width: 800, height: 640, view: new Quad(800,640,0xCCCCCC) } );
 			
-			Starling.current.stage.addChild(transitionScreen);
 			TweenPlugin.activate([HexColorsPlugin]); //activation is permanent in the SWF, so this line only needs to be run once.
+			restartLevel = new Signal();
 		}
 		
 		override public function initialize():void {
 			super.initialize();
-			
 			// We add the different element for the game to work
 			add(nape);
 			
@@ -62,6 +61,7 @@ package core.states
 					pad.setButtonAction(GamePadMap.BUTTON_LEFT, "switch");
 					pad.setButtonAction(GamePadMap.BUTTON_BOTTOM, "jump");
 					pad.setButtonAction(GamePadMap.BUTTON_TOP, "taunt");
+					pad.setButtonAction(GamePadMap.START, "start");
 					//pad.setButtonAction(GamePadMap.BUTTON_RIGHT, "use");
 				}
 				
@@ -79,6 +79,9 @@ package core.states
 				keyboard.addKeyAction("up", Keyboard.UP);
 				keyboard.addKeyAction("down", Keyboard.DOWN);
 				
+				keyboard.addKeyAction("start", Keyboard.ENTER);
+				keyboard.addKeyAction("start", Keyboard.ESCAPE);
+				
 				keyboard.addKeyAction("jump", Keyboard.SPACE);
 				keyboard.addKeyAction("taunt", Keyboard.TAB);
 				keyboard.addKeyAction("switch", Keyboard.SHIFT);
@@ -90,6 +93,10 @@ package core.states
 				controlsAdded = true;
 			}
 			
+			transitionScreen = new Quad(800, 640, 0x000000);
+			transitionScreen.alpha = 1;
+			Starling.current.stage.addChild(transitionScreen);
+			
 			add(_background);
 			
 			/* TEST PURPOSE */
@@ -99,7 +106,7 @@ package core.states
 			
 			view.camera.setUp(hero, new Rectangle(0,0, 800, 640), null, new Point(0.5, 0.5));
 			
-			TweenLite.to(transitionScreen, 0.3, { alpha : 0 } );
+			TweenLite.to(transitionScreen, 1, { alpha : 0 } );
 		}
 		
 		override public function destroy():void

@@ -20,6 +20,18 @@ package embed
 		[Embed(source = "assets/hero.png")]
 		public static var HeroSpriteSheetGraphics:Class;
 		
+		// UI
+		[Embed(source = "assets/timerPlusFive.png")]
+		public static var TimerPlusFive:Class;
+		[Embed(source = "assets/howtoplay.png")]
+		public static var HowToPlay:Class;
+		
+		// SONGS
+		[Embed(source = "assets/main.mp3")]
+		public static var SongMain:Class;
+		[Embed(source = "assets/muffled.mp3")]
+		public static var SongMuffled:Class;
+		
 		public function EmbedAssets() { throw("Cannot instanciate this class"); }
 	}
 

@@ -3,14 +3,14 @@
 	
 	<id>LudumDare31</id> 
 	<versionNumber>1.0</versionNumber> 
-	<filename>LudumDare31</filename> 
+	<filename>Balls and Blocks</filename> 
 	
-	<name>LudumDare31</name> 
+	<name>Balls and Blocks</name> 
 	<description></description> 
 	<copyright></copyright> 
 	
 	<initialWindow> 
-		<title>LudumDare31</title> 
+		<title>Balls and Blocks</title> 
 		<content>LudumDare31.swf</content> 
 		<systemChrome>standard</systemChrome> 
 		<transparent>false</transparent> 

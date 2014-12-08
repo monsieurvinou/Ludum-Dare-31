@@ -1,6 +1,7 @@
 package core.objects 
 {
 	import citrus.core.CitrusObject;
+	import citrus.objects.CitrusSprite;
 	import citrus.objects.NapePhysicsObject;
 	import citrus.objects.platformer.nape.Platform;
 	import citrus.objects.platformer.nape.Sensor;
@@ -32,6 +33,7 @@ package core.objects
 		public static var positionPossible:Array;
 		protected var _isTransforming:Boolean = false;
 		public var rotationFactor:Number = 0.01;
+		protected var timerPlusFive:CitrusSprite;
 		
 		
 		public function Collectible() 
@@ -50,6 +52,14 @@ package core.objects
 			positionPossible.splice(random, 1);
 			
 			_view = new Image( Texture.fromBitmap(new EmbedAssets.CollectibleView()));
+		}
+		
+		override public function initialize(pool:Object=null):void
+		{
+			super.initialize(pool);
+			timerPlusFive = new CitrusSprite("", { view: new Image(Texture.fromBitmap(new EmbedAssets.TimerPlusFive())) } );
+			timerPlusFive.view.alpha = 0;
+			_ce.state.add(timerPlusFive);
 		}
 		
 		protected function initializePositions():void
@@ -101,6 +111,19 @@ package core.objects
 					TweenLite.to(_view, 2, { alpha: 0.4, onComplete: createBlock } );
 					TweenLite.to(this, 1.3, { rotationFactor: 0.2 } );
 					randomColor();
+					
+					// Plus five
+					if ( x > 450 ) timerPlusFive.x = x - timerPlusFive.view.width;
+					else timerPlusFive.x = x;
+					
+					timerPlusFive.y = y;
+					TweenLite.to(timerPlusFive.view, 0.5, { alpha: 1, onComplete:function():void {
+						TweenLite.to(timerPlusFive.view, 1.8, { alpha: 0, onComplete: function():void {
+							timerPlusFive.kill = true;
+						} } );
+					}});
+					
+					TweenLite.to(timerPlusFive, 2.6, { y: timerPlusFive.y - 25 } );
 				}
 			}
 		}

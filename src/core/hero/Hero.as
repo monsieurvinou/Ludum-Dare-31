@@ -10,6 +10,10 @@ package core.hero
 	import citrus.physics.nape.NapeUtils;
 	import citrus.physics.PhysicsCollisionCategories;
 	import citrus.view.starlingview.AnimationSequence;
+	import com.greensock.TweenLite;
+	import com.greensock.TweenMax;
+	import core.platforms.PlatRed;
+	import core.states.game.GameState;
 	import flash.geom.Rectangle;
 	import nape.callbacks.CbType;
 	import nape.callbacks.InteractionCallback;
@@ -148,7 +152,6 @@ package core.hero
 				}
 			}
 			if ( !_isTaunting ) updateAnimation();
-			trace("Animation : ", _animation);
 		}
 		
 		protected function endTaunting(animationName:String):void
@@ -226,6 +229,25 @@ package core.hero
 			}
 		}
 		
+		public function die():void
+		{
+			// ANIMATION
+			if ( _isTaunting ) {
+				(_view as AnimationSequence).onAnimationComplete.remove(endTaunting);
+				_isTaunting = false;
+			}
+			(_ce.state as GameState).isDying = true;
+			controlsEnabled = false;
+			updateCallEnabled = false;
+			_body.type = BodyType.STATIC;
+			TweenMax.to(_view, 0.15, { alpha: 0, reversed: true, repeat: 8, yoyo:true, onReverseComplete: function():void {
+				TweenLite.to(_view, 0.1, { alpha: 0 } );
+				// Score informations
+				kill = true;
+				(_ce.state as GameState).isScoreScreen = true;
+			} });
+		}
+		
 		protected function updateAnimation():void {
 			
 			var prevAnimation:String = _animation;
@@ -246,7 +268,8 @@ package core.hero
 		override public function handleBeginContact(callback:InteractionCallback):void 
 		{
 			var collider:NapePhysicsObject = NapeUtils.CollisionGetOther(this, callback);
-			if (callback.arbiters.length > 0 && callback.arbiters.at(0).collisionArbiter) {	
+			if ( collider is PlatRed ) die();
+			if (callback.arbiters.length > 0 && callback.arbiters.at(0).collisionArbiter) {
 				var collisionAngle:Number = callback.arbiters.at(0).collisionArbiter.normal.angle * 180 / Math.PI;
 				if ( !_onGround ) {
 					if ((collisionAngle > 45 && collisionAngle < 135) || collisionAngle == 90)
@@ -267,7 +290,6 @@ package core.hero
 						}
 					}
 				}
-				trace("COLLISION ANGLE : ", collisionAngle);
 			}
 		}
 		

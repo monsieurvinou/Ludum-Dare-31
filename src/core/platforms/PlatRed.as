@@ -16,16 +16,6 @@ package core.platforms
 		{
 			super(name, params);
 			_view = new Quad(_width, _height, 0xBB6464);
-			beginContactCallEnabled = true;
-		}
-		
-		public function handleBeginCallback(callback:InteractionCallback):void
-		{
-			super.handleBeginContact(callback);
-			var collider:NapePhysicsObject = NapeUtils.CollisionGetOther(this, callback);
-			if ( collider is Hero ) {
-				// (collider as Hero).die();
-			}
 		}
 	}
 }
